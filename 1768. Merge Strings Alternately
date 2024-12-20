@@ -1,0 +1,39 @@
+class Solution {
+    /**
+     * Merges two strings alternately. If one string is longer, the remaining characters
+     * are appended at the end.
+     *
+     * @param word1 The first string to merge.
+     * @param word2 The second string to merge.
+     * @return The merged string with characters alternately taken from word1 and word2.
+     */
+    public static String mergeAlternately(String word1, String word2) {
+        // Create a StringBuilder to efficiently build the resulting merged string
+        StringBuilder sb = new StringBuilder();
+        
+        // Initialize index variables for both strings
+        int i = 0; // Index for word1
+        int j = 0; // Index for word2
+
+        // Iterate while both strings have characters left
+        while (i < word1.length() && j < word2.length()) {
+            // Append the current character of word1 and increment its index
+            sb.append(word1.charAt(i++));
+            // Append the current character of word2 and increment its index
+            sb.append(word2.charAt(j++));
+        }
+
+        // Append any remaining characters in word1 (if word1 is longer)
+        while (i < word1.length()) {
+            sb.append(word1.charAt(i++)); // Add the current character and move to the next
+        }
+
+        // Append any remaining characters in word2 (if word2 is longer)
+        while (j < word2.length()) {
+            sb.append(word2.charAt(j++)); // Add the current character and move to the next
+        }
+
+        // Convert the StringBuilder object to a String and return it
+        return sb.toString();
+    }
+}
