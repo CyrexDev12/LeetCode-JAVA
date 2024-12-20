@@ -1,0 +1,47 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;            // The value stored in the node
+ *     ListNode next;      // Reference to the next node in the list
+ *     ListNode() {}       // Default constructor
+ *     ListNode(int val) { this.val = val; }                    // Constructor with value
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; } // Constructor with value and next node
+ * }
+ */
+class Solution {
+    /**
+     * Merges two sorted singly-linked lists and returns the head of the merged list.
+     *
+     * @param list1 The head of the first sorted linked list.
+     * @param list2 The head of the second sorted linked list.
+     * @return The head of the merged sorted linked list.
+     */
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        // Base Case 1: If the first list is empty, return the second list
+        if (list1 == null) { 
+            return list2; 
+        }
+        
+        // Base Case 2: If the second list is empty, return the first list
+        if (list2 == null) { 
+            return list1; 
+        }
+
+        ListNode head; // Initialize a new ListNode to serve as the head of the merged list
+
+        // Compare the current nodes of both lists to determine which node to include next in the merged list
+        if (list1.val < list2.val) { 
+            head = list1;          // Assign the smaller node to 'head'
+            list1 = list1.next;    // Move to the next node in the first list
+        } else {
+            head = list2;          // Assign the smaller node to 'head'
+            list2 = list2.next;    // Move to the next node in the second list
+        }
+
+        // Recursively merge the remaining nodes and assign the result to the 'next' of the current head
+        head.next = mergeTwoLists(list1, list2);
+        
+        // Return the head of the merged list
+        return head;
+    }
+}
