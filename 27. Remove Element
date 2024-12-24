@@ -1,0 +1,14 @@
+class Solution {
+    // Take inputs of an array, and with the val, remove the occurences of the integer, then return the new length of the array. 
+    public int removeElement(int[] nums, int val) {
+       int i = 0;
+
+       for (int j = 0; j < nums.length; j++) {
+        if (nums[j] != val) {
+            nums[i] = nums[j];
+            i++;
+        }
+       }
+    return i; 
+    }
+}
