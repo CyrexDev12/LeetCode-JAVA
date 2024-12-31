@@ -1,0 +1,35 @@
+class Solution {
+    public int calculate(String s) {
+  int result = 0; // result of the calculation 
+        int num = 0; // current number
+        int sign = 1; // current sign
+        Stack<Integer> stack = new Stack<Integer>(); // stack to store the numbers 
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i); // Takes the current char in the string 
+            if (Character.isDigit(c)) { // If the char is a digit 
+                num = num * 10 + (c - '0'); // Add the digit to the current number
+            } else if (c == '+') { // if the char is a plus sign 
+                result += sign * num; // add the current to the result }
+                num = 0; // reset the current number
+                sign = 1; // Set the sign to positive 
+            } else if (c == '-') { // if the char is a minus sign 
+                result += sign * num; // add the current to the result}
+                num = 0; // reset the current number 
+                sign = -1; // Set the sign to negative 
+            } else if (c == '(') { // if the char is an open bracket
+                stack.push(result); // push the current result to the stack
+                stack.push(sign); // push the current sign to the stack
+                result = 0; // reset the result
+                sign = 1; // set the sign to positive
+            } else if (c == ')') { // if the char is a close bracket
+                result += sign * num; // add the current to the result
+                num = 0; // reset the current number
+                result *= stack.pop(); // multiply the result by the sign in the stack
+                result += stack.pop(); // add the result in the stack to the current result
+
+                }
+        }
+        result += sign * num; // add the last number to the result
+        return result;
+    }
+}
