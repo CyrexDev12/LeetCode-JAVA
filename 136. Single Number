@@ -1,0 +1,23 @@
+import java.util.*;
+
+class Solution {
+    public int singleNumber(int[] nums) {
+        HashMap<Integer, Integer> map = new HashMap<>(); 
+
+        // Set the numbers onto the hasmap 
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+
+        // Collect the number that only appear once 
+        int uniqueNum = 0; 
+        for (int num : nums) {
+            if (map.get(num) == 1) {
+                uniqueNum = num; 
+            }
+        }
+
+        // Now get 
+        return uniqueNum;
+    }
+}
