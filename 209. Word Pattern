@@ -1,0 +1,34 @@
+class Solution {
+       public boolean wordPattern(String pattern, String s) {
+        HashMap<Character, String> patternToWord = new HashMap<>();
+        HashMap<String, Character> wordToPattern = new HashMap<>();
+        
+        String[] words = s.split(" "); 
+        char[] patternArray = pattern.toCharArray();
+        
+        if (patternArray.length != words.length) return false; // Pattern & words must have same length
+
+        for (int i = 0; i < patternArray.length; i++) {
+            char p = patternArray[i];
+            String word = words[i];
+
+            // Check if pattern already exists with a different word
+            if (patternToWord.containsKey(p) && !patternToWord.get(p).equals(word)) {
+                return false;
+            }
+
+            // Check if word already exists with a different pattern
+            if (wordToPattern.containsKey(word) && wordToPattern.get(word) != p) {
+                return false;
+            }
+
+            // Store mapping
+            patternToWord.put(p, word);
+            wordToPattern.put(word, p);
+        }
+
+        return true;
+    }
+
+
+}
