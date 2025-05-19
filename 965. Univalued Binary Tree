@@ -1,0 +1,56 @@
+// Long solution 
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isUnivalTree(TreeNode root) {
+        
+        // Find if all of the values in the tree are the same 
+
+        // First run the transveral 
+
+        ArrayList<Integer> resultList = new ArrayList<>();
+
+    inOrderTraversal(root, resultList); 
+
+    // Now determine if all values in the array are equal 
+
+    return allValuesEqual(resultList);
+
+
+    }
+
+    
+
+
+    // Do a in order traversal 
+
+    private void inOrderTraversal(TreeNode node, ArrayList<Integer> resultList) {
+        if (node == null) {
+            return;
+        }   
+
+        inOrderTraversal(node.left, resultList);
+        resultList.add(node.val);
+        inOrderTraversal(node.right, resultList);
+    }
+
+
+    public static boolean allValuesEqual(ArrayList<Integer> list) {
+    return list.stream().distinct().limit(2).count() <= 1;
+}
+
+}
