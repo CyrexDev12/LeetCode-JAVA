@@ -26,3 +26,52 @@ class Solution {
 
     }
 }
+
+// Solution 2
+
+
+class OtherSolution {
+    List<List<Integer>> ans ;
+    public List<List<Integer>> permute(int[] nums) {
+        
+        ans = new ArrayList<>() ;
+
+        fun( nums , 0 ) ;
+
+        return ans ;
+
+    }
+    public void fun( int nums[] , int k ){
+        // Base case 
+        if( k == nums.length ){
+
+            // Creating a list to store nums 
+            ArrayList<Integer> temp = new ArrayList<>() ;
+            for( int a : nums )
+                temp.add( a ) ;
+            
+            // adding temp to answer 
+            ans.add( temp ) ;
+
+            return ;
+        }
+
+        // for all choices 
+        for( int i = k ; i < nums.length ; i++ ){
+            // applying the choice 
+            swap( i , k , nums ) ;
+            // calling recursion
+            fun( nums , k+1 ) ;
+            // backtrack i.e removing the choice applied
+            swap( i , k , nums ) ;
+
+        }
+
+
+    }
+    public void swap( int i , int k , int nums[] ){
+        int temp = nums[i] ;
+        nums[i] = nums[k] ;
+        nums[k] = temp ;
+    }
+}
