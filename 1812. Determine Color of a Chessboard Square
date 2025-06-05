@@ -1,0 +1,39 @@
+class Solution {
+    public boolean squareIsWhite(String coordinates) {
+        // first we need to parse the string into the letter, and the number
+
+        String[] parsedArray = coordinates.split("");
+
+        String letterCoordinate = parsedArray[0];
+        String numCoordinate = parsedArray[1];
+
+        // Parse and change the number coordinate string into an integer
+        int num = Integer.parseInt(numCoordinate);
+
+        // Now that we have it parsed we will start off seeing if the number is even or odd
+    List<String> Evens = Arrays.asList("a", "c", "e", "g");
+    List<String> Odds = Arrays.asList("b", "d", "f", "h");
+
+        // We will return true if the square is white
+
+        if (num % 2 == 0 && Evens.contains(letterCoordinate)) {
+            return true;
+        }
+
+        else if (num % 2 != 0 && Odds.contains(letterCoordinate)) {
+            return true;
+        }
+
+        return false;
+    }
+}
+
+
+// Better and faster solution 
+
+public boolean squareIsWhite(String s) {
+    int column = s.charAt(0) - 'a'; // 0 to 7
+    int row = s.charAt(1) - '1';    // 0 to 7
+
+    return (column + row) % 2 != 0; // true if white, false if black
+}
