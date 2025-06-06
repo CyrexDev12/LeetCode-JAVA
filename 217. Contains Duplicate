@@ -1,0 +1,28 @@
+import java.util.HashSet;
+import java.util.Set;
+
+public class main {
+    public static void main(String[] args) {
+        int[] testArr = {1, 2, 3, 4};
+
+        System.out.println("Testing to see if there are duplicates... \n And the result is: " + containsDuplicate(testArr));
+    }
+
+    // Method to check if an array contains a duplicate
+    // The best approach will be by using a hash table 
+    // We can use a set, as sets cannot contain duplicates only unique integers
+ 
+    public static boolean containsDuplicate(int[] arr) {
+        Set<Integer> mySet = new HashSet<>(arr.length);
+
+        for (int x: arr) {
+            if (mySet.contains(x)) {
+                return true;
+            }
+                mySet.add(x);
+            }
+            return false;
+        }
+
+
+    }
