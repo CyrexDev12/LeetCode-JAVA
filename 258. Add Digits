@@ -1,0 +1,27 @@
+class Solution {
+    public int addDigits(int num) {
+        // Keep adding until we only have one digit 
+
+        // We need to parse each number so they are individual, to do this lets convert the int to a string 
+        
+
+        // Now that it is converted to a string, we will loop through it to get the char, 
+        // Then we should convert it back to an integer 
+        // int myInt = Character.getNumericValue(myChar);
+
+        String strNum = "";
+
+        while (strNum.length() != 1) {
+            strNum = Integer.toString(num);
+            num = 0;
+        for (int i = 0; i < strNum.length(); i++) {
+            char currNum = strNum.charAt(i);
+            int backToNum = Character.getNumericValue(currNum);
+            num += backToNum; 
+            }
+        }
+        return num;
+
+
+    }
+}
