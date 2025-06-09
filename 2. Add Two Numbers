@@ -48,3 +48,11 @@ class Solution {
         return dummyHead.next;
     }
 }
+
+
+// Faster O(1) math solution 
+
+   public int addDigitsREFINED(int num) {
+        return num == 0 ? 0 : 1 + ((num - 1) % 9);
+    }
+}
