@@ -1,0 +1,32 @@
+class Solution {
+    public boolean checkRecord(String s) {
+        // Attendance reward if the student was absent strictly for fewer than 2 days total, and if they were never late for 3 consevutive days 
+        int absentCounter = 0; 
+        int lateCounter = 0; 
+
+        boolean lateCriteria = false; 
+
+
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == 'A') {
+                absentCounter++; 
+            }
+
+            if (s.charAt(i) == 'L') {
+                lateCounter++;
+                if (lateCounter == 3) {
+                    lateCriteria = true;
+                }
+            }
+
+            else {
+                lateCounter = 0; 
+            }
+        }
+
+        if (absentCounter < 2 && !lateCriteria) {
+            return true;
+        }
+        return false;
+    }
+}
