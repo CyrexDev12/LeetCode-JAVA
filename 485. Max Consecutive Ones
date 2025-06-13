@@ -1,0 +1,23 @@
+class Solution {
+// O(N) Solution 
+    public int findMaxConsecutiveOnes(int[] nums) {
+        // We need to find the amount of consevutive ones in the array, returning the highest count
+
+        int count = 0; 
+        int maxCount = 0; 
+
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 1) {
+                count++; 
+                if (count > maxCount) {
+                    maxCount = count; 
+                }
+            }
+            else {
+                count = 0; 
+            }
+        }
+    return maxCount; 
+
+    }
+}
