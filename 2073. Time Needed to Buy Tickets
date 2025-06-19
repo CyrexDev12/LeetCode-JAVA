@@ -53,8 +53,30 @@ class Solution {
 }
 
 
-// Low-Level Approach using just an array O(1)
+
+// Low level approach without simulating, and calculating O(n)
 
 
-// Even lower level approach using math O(1)
+class Solution {
+    public static int timeRequiredToBuy(int[] tickets, int k) {
+    int time = 0; 
 
+    for (int i = 0; i < tickets.length; i++) {
+        // If the current person is before or after at the desired person 'k'
+
+        if (i <= k) {
+            // Buy the min of tickets available at person 'k' and at the current person 
+            time += Math.min(tickets[k], tickets[i]);
+        } else {
+            // If the current person is after 'k', buy the min of tickets available at person 'k' - 1) and the current person
+
+            time += Math.min(tickets[k] - 1, tickets[i]);
+        }
+    }
+
+    return time; 
+
+
+
+  }
+}
