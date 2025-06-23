@@ -15,13 +15,15 @@
  */
 class Solution {
     public List<TreeNode> delNodes(TreeNode root, int[] to_delete) {
+        // Add elements to a set so we have unique numbers only
         Set<Integer> toDeleteSet = new HashSet<>();
         for (int val : to_delete) {
     toDeleteSet.add(val);
 }
-
+    // Create the List<TreeNode> so we can return a list
     List<TreeNode> forest = new ArrayList<>();
 
+// If the root value does not have a number we are wanting to delete we will add it to the lsit 
     if (!toDeleteSet.contains(root.val)) {
     forest.add(root);
 }
@@ -39,6 +41,7 @@ return null;
 node.left = delNodesHelper(node.left, toDeleteSet, forest);
 node.right = delNodesHelper(node.right, toDeleteSet, forest);
 
+// If the node we are on has children then it will be null, otherwise it will just be skipped.
     if (toDeleteSet.contains(node.val)) {
     if (node.left != null) {
 forest.add(node.left);
