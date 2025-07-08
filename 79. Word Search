@@ -1,0 +1,85 @@
+// HIGH TIME COMPLEXITY
+import java.util.ArrayList;
+
+public class Solution {
+     public static boolean exist(char[][] board, String word) {
+        int n = board.length;
+        int k = board[0].length;
+        boolean[][] alreadyUsed = new boolean[n][k];
+
+        int row = -1;
+        int col = -1; 
+        boolean found = false; 
+        boolean wordFound = false;
+
+        // Find all occurences of the first letter and call the backtracking method
+        // Debug to find count
+        int count = 0;
+
+        for (int i = 0; i < board.length && !found; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                if (board[i][j] == word.charAt(0)) {
+                    row = i; 
+                    col = j;
+                    count++;
+
+                    
+                    System.out.println("DEBUG //: Row and collumn being sent to parameters " + "[" + row + "]" + "[" + col + "] Count: " + count);
+                    alreadyUsed[row][col] = true;
+                     wordFound = backtrack(board, word, alreadyUsed, row, col, 1);
+
+                     if (wordFound) {
+                        System.out.println("DEBUG //: FOUND WORD");
+                        return true;
+                     } 
+                     alreadyUsed[row][col] = false;
+                } 
+            } 
+        }
+       
+
+        // If the first character is not found return false, or no valid sequence is found return false
+
+
+
+        return false;
+    }
+
+
+    // Find the first occurence of the first letter in the word
+    // We need to prevent out of bounds exceptions from happening 
+    public static boolean backtrack(char[][] board, String word, boolean[][] used, int row, int col, int currWordIndex) {
+    if (currWordIndex == word.length()) {
+        return true;
+    }
+
+    int[] rowOffsets = {-1, 1, 0, 0};
+    int[] colOffsets = {0, 0, -1, 1};
+
+    for (int d = 0; d < 4; d++) {
+        int newRow = row + rowOffsets[d];
+        int newCol = col + colOffsets[d];
+
+        if (newRow >= 0 && newRow < board.length &&
+            newCol >= 0 && newCol < board[0].length &&
+            !used[newRow][newCol] &&
+            board[newRow][newCol] == word.charAt(currWordIndex)) {
+
+            used[newRow][newCol] = true;
+
+            if (backtrack(board, word, used, newRow, newCol, currWordIndex + 1)) {
+                return true;
+            }
+
+            // 🔁 Backtrack
+            used[newRow][newCol] = false;
+        }
+    }
+
+    return false;
+}
+
+
+
+}
+
