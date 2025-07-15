@@ -1,0 +1,55 @@
+class Solution {
+    public boolean isValid(String word) {
+        // Must contain a min of 3 characters
+        // Must contain only digits (0-9), and english letters
+        // Inlcudes at least one vowel
+        // It includes at least one constant s
+        // Voewls: A, E, I, O, U
+
+        boolean[] requirements = new boolean[4];
+
+        requirements[1] = true; 
+
+        for (int i = 0; i < word.length(); i++) {
+          if (i >= 2 && requirements[0] == false) {
+            requirements[0] = true; 
+          }
+
+          if (!Character.isLetterOrDigit(word.charAt(i)) && requirements[1] == true) {
+            requirements[1] = false;
+          }
+
+          if (isVowel(word.charAt(i)) && requirements[2] == false) {
+            requirements[2] = true;
+          }
+
+          if (Character.isLetter(word.charAt(i)) && !isVowel(word.charAt(i)) && requirements[3] == false) {
+          requirements[3] = true;
+          }
+       
+        }
+
+        // Check 
+
+        for (int i = 0; i < requirements.length; i++) {
+            if (requirements[i] == false) {
+                return false; 
+            }
+        }
+
+
+    
+
+
+    return true; 
+        
+    }
+
+
+
+    public boolean isVowel(char c) {
+        return "AEIOUaeiou".indexOf(c) != -1; 
+    }
+
+
+}
