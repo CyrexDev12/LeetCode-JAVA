@@ -1,0 +1,35 @@
+class Solution {
+   public static int calculate(String s) {
+        int num = 0; // current number
+        int sign = 1; // current sign
+        char prevOp = '+'; // Start with '+' to push the first number
+        s = s.replaceAll(" ", ""); // remove spaces
+        Stack<Integer> stack = new Stack<Integer>(); // stack to store the numbers 
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i); // Takes the current char in the string 
+            if (Character.isDigit(c)) { // If the char is a digit 
+                num = num * 10 + (c - '0'); // Add the digit to the current number
+            } 
+
+            if (!Character.isDigit(c) || i == s.length() - 1) {
+                if (prevOp == '+') {
+                    stack.push(num);
+                } else if (prevOp == '-') {
+                    stack.push(-num);
+                } else if (prevOp == '*') {
+                    stack.push(stack.pop() * num);
+                } else if (prevOp == '/') {
+                    stack.push(stack.pop() / num);
+                } 
+                prevOp = c;
+                num = 0; 
+            }
+    }
+    int result = 0; 
+    for (int n : stack) {
+        result += n;
+    }
+    return result;
+
+}
+}
