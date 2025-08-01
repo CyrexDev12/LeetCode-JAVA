@@ -1,0 +1,65 @@
+
+// First Attempt time complexity scaled too much on this one, I don't know why leetcode decided to use List<List<Integer>> on this one
+
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        // The number of collums is equal to the current row number
+
+        List<List<Integer>> pascTri = new ArrayList<>();
+
+        for (int i = 0; i < numRows; i++) {
+            List<Integer> row = new ArrayList<>();
+
+            for (int j = 0; j <= i; j++) {
+                // Populate each row
+                row.add(getPascalNumber(i, j));
+            }
+            pascTri.add(row);
+        }
+    return pascTri;
+
+    }
+
+    
+public int getPascalNumber(int n, int k) {
+    if (k < 0 || k > n) {
+        return 0;
+    }
+    if (k == 0 || k == n) {
+        return 1;
+    }
+
+    return getPascalNumber(n - 1, k - 1) + getPascalNumber(n - 1, k);
+}
+
+// EFFICIENT SOLUTION
+
+public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> pascTri = new ArrayList<>();
+
+        for (int i = 0; i < numRows; i++) {
+            List<Integer> row = new ArrayList<>();
+
+            for (int j = 0; j <= i; j++) {
+                if (j == 0 || j == i) {
+                    row.add(1); // First and last elements are always 1
+                } else {
+                    int val = pascTri.get(i - 1).get(j - 1) + pascTri.get(i - 1).get(j);
+                    row.add(val);
+                }
+            }
+
+            pascTri.add(row);
+        }
+
+        return pascTri;
+    }
+}
+
+
+
+
+
+
+
+}
