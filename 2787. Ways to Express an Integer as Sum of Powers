@@ -1,0 +1,22 @@
+class Solution {
+
+    final int MOD = 1_000_000_007; // Declare a constant mod to avoid integer overflow
+        
+    public int numberOfWays(int n, int x) {
+        long[] dp = new long[n + 1]; // Store the number of ways to sum up to i powers of integers
+        dp[0] = 1; // 1 way to to make sum 0 (by choosing nothing)
+
+        for (int i = 1; i <= n; i++) { // Go through all integers leading up to n 
+            int val = (int) Math.pow(i, x);
+            if (val > n) { // Set condition, if greater we know we cant use it
+                break;
+            }
+            for (int j = n; j >= val; j--) {
+                dp[j] = (dp[j] + dp[j - val]) % MOD;  //Update the number of ways and ensure it doesnt get to large
+            }
+        }
+        return (int) dp[n];
+      
+    }
+
+}
