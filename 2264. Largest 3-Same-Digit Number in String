@@ -1,0 +1,114 @@
+// O(N) Solution 
+
+class Solution {
+    public String largestGoodInteger(String num) {
+        // We need to get the starting index and the end index 
+        List<String> NumAccepted = new ArrayList<>();
+        int count = 0; 
+        int n = num.length();
+        // If the size is less 3 we return nothing 
+
+        if (n < 3) {
+            return "";
+        }
+
+        // For cases when the length is 3 
+
+        if (n == 3) {
+             if (num.charAt(0) == num.charAt(1) && num.charAt(0) == num.charAt(2)) {
+                return num; 
+             }
+             else {
+                return "";
+             }
+        }
+    
+
+        for (int i = 0; i < num.length() - 2; i++) {
+            if (num.charAt(i) == num.charAt(i + 1) && num.charAt(i) == num.charAt(i + 2)) {
+                // We can accept the strings that pass any of those conditions
+                if (n == 3) {
+                    return num;
+                } 
+
+                int startIndex = i;
+                int endIndex = i + 3; 
+                String SString = num.substring(startIndex, endIndex);
+                NumAccepted.add(SString);
+                count++; 
+            }
+        }
+
+        // If count is 0 return nothing 
+        if (count == 0) {
+            return "";
+        }
+
+
+        // Return the greatest value 
+        int[] result = new int[NumAccepted.size()];
+
+        for (int i = 0; i < NumAccepted.size(); i++) {
+            // Turn the value into a integer 
+            int val = Integer.parseInt(NumAccepted.get(i));
+            result[i] = val; 
+        }
+
+        // Lastly, compare and find the max value in the array 
+
+        int max = Integer.MIN_VALUE; 
+       
+
+        for (int i = 0; i < result.length; i++) {
+            if (max < result[i]) {
+                max = result[i];
+            }
+        }
+
+        // Handle leading zeroes case 
+
+        if (max == 0) {
+            return "000";
+        }
+
+
+        return Integer.toString(max);
+
+
+
+    }
+
+
+
+}
+
+
+// More sufficient way also O(N) O(1) space complexity 
+
+class Solution {
+    private List<String> sameDigitNumbers = List.of("999", "888", "777", "666", "555", "444", "333", "222", "111", "000");
+
+    // Check whether the 'num' string contains the 'sameDigitNumber' string or not.
+    private boolean contains(String sameDigitNumber, String num) {
+        for (int index = 0; index <= num.length() - 3; ++index) {
+            if (num.charAt(index) == sameDigitNumber.charAt(0) &&
+                num.charAt(index + 1) == sameDigitNumber.charAt(1) &&
+                num.charAt(index + 2) == sameDigitNumber.charAt(2)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String largestGoodInteger(String num) {
+        // Iterate on all 'sameDigitNumbers' and check if the string 'num' contains it.
+        for (String sameDigitNumber : sameDigitNumbers) {
+            if (contains(sameDigitNumber, num)) {
+                // Return the current 'sameDigitNumbers'.
+                return sameDigitNumber;
+            }
+        }
+        // No 3 consecutive same digits are present in the string 'num'.
+        return "";
+    }
+}
